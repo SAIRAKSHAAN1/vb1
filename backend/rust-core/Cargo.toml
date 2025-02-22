@@ -1,0 +1,22 @@
+[package]
+name = "vector-db-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.28", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+ndarray = "0.15"
+rand = "0.8"
+hnsw = "0.11"
+thiserror = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+async-trait = "0.1"
+futures = "0.3"
+actix-web = "4.3"
+
+[dev-dependencies]
+criterion = "0.4"
+tokio-test = "0.4" 
