@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  vector-db:
+    build:
+      context: ./backend/rust-core
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - RUST_LOG=info
+    volumes:
+      - vector_data:/data
+
+  embedding-service:
+    build:
+      context: ./backend/python-ml
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/python-ml:/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  vector_data: 
